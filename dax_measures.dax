@@ -1,0 +1,63 @@
+// =========================================================================
+// Advanced DAX Measures for FMCG Manufacturing & OTIF Supply Chain Analytics
+// Designed for Power BI Desktop
+// Author: Adil El Idrissi
+// =========================================================================
+
+// 1. Total Volume Produced (in Liters)
+Total Volume Liters := 
+SUMX(
+    Fact_Production_Batch,
+    Fact_Production_Batch[units_produced] * RELATED(Dim_Product_SKU[volume_liters])
+)
+
+// 2. Production Availability Rate (%)
+Availability Rate := 
+VAR TotalPlanned = SUM(Fact_Production_Batch[planned_runtime_min])
+VAR TotalDowntime = SUM(Fact_Production_Batch[downtime_min])
+RETURN
+IF(
+    TotalPlanned > 0,
+    DIVIDE(TotalPlanned - TotalDowntime, TotalPlanned, 0),
+    BLANK()
+)
+
+// 3. Production Quality Rate (%)
+Quality Rate := 
+VAR TotalProduced = SUM(Fact_Production_Batch[units_produced])
+VAR DefectiveUnits = SUM(Fact_Production_Batch[units_defective])
+VAR GoodUnits = TotalProduced - DefectiveUnits
+RETURN
+DIVIDE(GoodUnits, TotalProduced, 0)
+
+// 4. Production Performance Rate (%)
+Performance Rate := 
+VAR TotalProduced = SUM(Fact_Production_Batch[units_produced])
+VAR TotalPlannedUnits = SUM(Fact_Production_Batch[units_planned])
+RETURN
+DIVIDE(TotalProduced, TotalPlannedUnits, 0)
+
+// 5. OEE (Overall Equipment Effectiveness)
+OEE := 
+[Availability Rate] * [Performance Rate] * [Quality Rate]
+
+// 6. OTIF Rate (On-Time In-Full Delivery %)
+OTIF Rate := 
+VAR TotalShipments = COUNTROWS(Fact_Shipment_Delivery)
+VAR SuccessfulOTIF = 
+    CALCULATE(
+        COUNTROWS(Fact_Shipment_Delivery),
+        Fact_Shipment_Delivery[delivery_status] = "On-Time",
+        Fact_Shipment_Delivery[quantity_delivered] >= Fact_Shipment_Delivery[quantity_ordered]
+    )
+RETURN
+DIVIDE(SuccessfulOTIF, TotalShipments, 0)
+
+// 7. OEE Target Health KPI Badge
+OEE Health Badge := 
+SWITCH(
+    TRUE(),
+    [OEE] >= 0.85, "🟢 World Class (>= 85%)",
+    [OEE] >= 0.75, "🟡 Acceptable (75-85%)",
+    "🔴 Critical Bottleneck (< 75%)"
+)

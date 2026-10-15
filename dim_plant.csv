@@ -1,0 +1,3 @@
+plant_id,plant_code,plant_name,location,capacity_liters_day
+1,PLANT-CASA-01,Usine Aïn Harrouda (Huiles),Casablanca,250000
+2,PLANT-CASA-02,Usine Roches Noires (Savons),Casablanca,120000

@@ -1,0 +1,5 @@
+sku_id,sku_code,product_name,category,brand,volume_liters,standard_cost_mad
+101,SKU-LES-5L,Lesieur Huile de Table 5L,Huile de table,Lesieur,5.0,62.5
+102,SKU-HUI-1L,Huilor Tournesol 1L,Huile de table,Huilor,1.0,14.8
+103,SKU-CRI-2L,Cristal Huile Végétale 2L,Huile de table,Cristal,2.0,27.0
+104,SKU-TAO-SAV,Taous Savon Traditionnel 250g,Savonnerie,Taous,0.25,4.5
