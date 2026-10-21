@@ -1,11 +1,11 @@
 # FMCG Supply Chain & Production Performance BI Platform (Power BI + SQL + DAX)
 
-An end-to-end operational Business Intelligence architecture modeled for high-volume agro-industrial manufacturing (e.g. Lesieur Cristal). Tracks production line efficiency (OEE), distribution logistics (OTIF), inventory holding costs, and automated stockout risk alerts across regional distribution centers.
+An end-to-end operational Business Intelligence architecture modeled for high-volume agro-industrial manufacturing (Agro-Industrial & FMCG Operations). Tracks production line efficiency (OEE), distribution logistics (OTIF), inventory holding costs, and automated stockout risk alerts across regional distribution centers.
 
 ---
 
 ## 🎯 Business Context & Alignment
-In large manufacturing corporations like Lesieur Cristal (vegetable oils, soaps, consumer goods), production plants in Casablanca and regional hubs throughout Morocco generate thousands of daily records across production lines, packaging, warehouse inventory, and carrier dispatches.
+In large agro-industrial manufacturing corporations (vegetable oils, consumer goods, food processing), production plants and regional hubs generate thousands of daily records across production lines, packaging, warehouse inventory, and carrier dispatches.
 
 Operations directors often struggle with:
 1. Fragmented Excel sheets causing reporting delays (reports ready days after production issues occurred).
